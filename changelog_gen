@@ -1,9 +1,9 @@
 #!/bin/sh
 
+export CHANGELOG_DIR=/home/"$USER"/changelog
 DATE=$(vendor/aokp/tools/getdate)
 ydate=$(date -d '1 day ago' +"%m/%d/%Y")
 sdate=${1}
-cdate=`date +"%m_%d_%Y"`
 rdir=`pwd`
 
 # Check the date start range is set
@@ -44,12 +44,11 @@ do
     fi
 done
 
-#move the changelog into .zip for goo integration
-    cd /home/KAsp3rd/aokp/
-    find . -name *aokp_\*.zip -exec zip {} changelog.txt \;
+echo "move the changelog into .zip for goo integration"
+    find . -name *aokp_*mr1*.zip -exec zip {} changelog.txt \;
     cd ..
 
-#remove changelog after pushing into .zip
+echo "remove changelog after pushing into .zip"
 rm "$CHANGELOG_DIR"/changelog.txt
 
 exit 0
