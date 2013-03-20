@@ -31,7 +31,7 @@ do
         elif [ "$origin" = "faux" ]; then
             proj_credit=Faux123
         else
-            proj_credit="KAsp3rd"
+            proj_credit=KAsp3rd
         fi
         # Write the changelog
         echo "$proj_credit Project name: $project" >> "$rdir"/changelog.txt
@@ -48,6 +48,6 @@ echo "move the changelog into .zip for goo integration"
     cd ..
 
 echo "remove changelog after pushing into .zip"
-    find . -name changelog.txt -exec rm {} \;
+    find $rdir -name changelog.txt -exec rm {} \;
 
 exit 0
