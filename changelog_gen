@@ -1,6 +1,5 @@
 #!/bin/sh
 
-export CHANGELOG_DIR=/home/"$USER"/changelog
 DATE=$(vendor/aokp/tools/getdate)
 ydate=$(date -d '1 day ago' +"%m/%d/%Y")
 sdate=${1}
@@ -35,12 +34,12 @@ do
             proj_credit="KAsp3rd"
         fi
         # Write the changelog
-        echo "$proj_credit Project name: $project" >> "$CHANGELOG_DIR"/changelog.txt
+        echo "$proj_credit Project name: $project" >> "$rdir"/changelog.txt
         echo "$log" | while read line
         do
-             echo "  *"${line}"" >> "$CHANGELOG_DIR"/changelog.txt
+             echo "  *"${line}"" >> "$rdir"/changelog.txt
         done
-        echo "" >> "$CHANGELOG_DIR"/changelog.txt
+        echo "" >> "$rdir"/changelog.txt
     fi
 done
 
@@ -49,6 +48,6 @@ echo "move the changelog into .zip for goo integration"
     cd ..
 
 echo "remove changelog after pushing into .zip"
-rm "$CHANGELOG_DIR"/changelog.txt
+    find . -name changelog.txt -exec rm {} \;
 
 exit 0
