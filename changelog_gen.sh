@@ -32,24 +32,24 @@ do
         elif [ "$origin" = "faux" ]; then
             proj_credit=Faux123
         else
-            proj_credit=""
+            proj_credit="KAsp3rd"
         fi
         # Write the changelog
-        echo "$proj_credit Project name: $project" >> "$WORKSPACE"/archive/changelog.txt
+        echo "$proj_credit Project name: $project" >> "$CHANGELOG_DIR"/changelog.txt
         echo "$log" | while read line
         do
-             echo "  *"${line}"" >> "$WORKSPACE"/archive/changelog.txt
+             echo "  *"${line}"" >> "$CHANGELOG_DIR"/changelog.txt
         done
-        echo "" >> "$WORKSPACE"/archive/changelog.txt
+        echo "" >> "$CHANGELOG_DIR"/changelog.txt
     fi
 done
 
 #move the changelog into .zip for goo integration
-    cd "$WORKSPACE"/archive    
-    find . -name *aokp_\*${sLUNCH}*.zip -exec zip {} changelog.txt \;
+    cd /home/KAsp3rd/aokp/
+    find . -name *aokp_\*.zip -exec zip {} changelog.txt \;
     cd ..
 
 #remove changelog after pushing into .zip
-rm "$WORKSPACE"/archive/changelog.txt
+rm "$CHANGELOG_DIR"/changelog.txt
 
 exit 0
