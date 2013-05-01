@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DATE=$(vendor/aokp/tools/getdate)
+DATE=$(vendor/carbon/tools/getdate)
 ydate=$(date -d '1 day ago' +"%m/%d/%Y")
 sdate=${1}
 rdir=`pwd`
@@ -22,16 +22,30 @@ do
     else
         # Prepend group project ownership to each project.
         origin=`grep "$project" $rdir/.repo/manifest.xml | awk {'print $4'} | cut -f2 -d '"'`
-        if [ "$origin" = "aokp" ]; then
-            proj_credit=AOKP
-        elif [ "$origin" = "aosp" ]; then
+        if [ "$origin" = "aosp" ]; then
             proj_credit=AOSP
+        elif [ "$origin" = "cr" ]; then
+            proj_credit=CarbonDev
         elif [ "$origin" = "cm" ]; then
             proj_credit=CyanogenMod
-        elif [ "$origin" = "faux" ]; then
-            proj_credit=Faux123
+        elif [ "$origin" = "aokp" ]; then
+            proj_credit=AOKP
+        elif [ "$origin" = "tm" ]; then
+            proj_credit=TheMuppets
+        elif [ "$origin" = "ub" ]; then
+            proj_credit=UnicornButter
+        elif [ "$origin" = "cmdev" ]; then
+            proj_credit=loosethisskin
+        elif [ "$origin" = "kejar31" ]; then
+            proj_credit=kejar31
+        elif [ "$origin" = "koush" ]; then
+            proj_credit=koush
+        elif [ "$origin" = "nc" ]; then
+            proj_credit=Nocoast
+        elif [ "$origin" = "gh" ]; then
+            proj_credit=Github
         else
-            proj_credit=KAsp3rd
+            proj_credit=CarbonDev
         fi
         # Write the changelog
         echo "$proj_credit Project name: $project" >> "$rdir"/changelog.txt
@@ -44,7 +58,7 @@ do
 done
 
 echo "move the changelog into .zip for goo integration"
-    find . -name *aokp_*mr1*.zip -exec zip {} changelog.txt \;
+    find . -name *CARBON-JB-*.zip -exec zip {} changelog.txt \;
     cd ..
 
 echo "remove changelog after pushing into .zip"
